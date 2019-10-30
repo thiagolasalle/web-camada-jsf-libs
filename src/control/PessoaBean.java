@@ -29,6 +29,10 @@ public class PessoaBean implements Serializable {
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
+	
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
 
 	public List<Pessoa> getPessoas() {
 		return pessoas;
