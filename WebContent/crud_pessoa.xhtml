@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template.xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<ui:define name="cabecalho">
+		<ui:include src="/templates/cabecalho.xhtml" />
+	</ui:define>
+	
+	<ui:define name="menu">
+	    <ui:include src="/templates/menu.xhtml" />
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<h:form id="formTabela">
+			<p:dataTable var="pessoa" value="#{pessoaBean.pessoas}" 
+			 		rows="10"
+		            paginator="true"
+		            rowsPerPageTemplate="5,10,15" >
+		            
+			    <p:column headerText="Id">
+			        <h:outputText value="#{pessoa.id}" />
+			    </p:column>
+			 
+			    <p:column headerText="Nome">
+			        <h:outputText value="#{pessoa.nome}" />
+			    </p:column>
+			 
+			    <p:column headerText="Email">
+			        <h:outputText value="#{pessoa.email}" />
+			    </p:column>
+			 
+			    <p:column headerText="Telefone">
+			        <h:outputText value="#{pessoa.telefone}" />
+			    </p:column>
+			    
+			    <p:column headerText="*">
+		            
+		            
+		            <p:commandButton value="Editar"	action="#{pessoaBean.Editar(pessoa)}"
+			    		onclick="PF('dlgEditarPessoa').show();"
+			    		update=":formEditarPessoa" />
+		            	
+		            <p:commandButton type="button" icon="pi pi-cloud-upload" 
+		            	value="Excluir" action="#{pessoaBean.Remover(item)}"/>
+		        </p:column>
+		        
+			</p:dataTable>
+		</h:form>
+		
+		<br />
+		
+		<h:panelGroup id="painelCadastro" rendered="#{!pessoaBean.editando}" >
+			<h3>Add Pessoa</h3>
+			<h:form>
+				<p>Nome: <p:inputText value="#{pessoaBean.pessoa.nome}" /></p>
+				<p>E-mail: <p:inputText value="#{pessoaBean.pessoa.email}" /></p>
+				<p>Telefone: <p:inputText value="#{pessoaBean.pessoa.telefone}" /></p>
+				<p>
+					<p:commandButton value="Add" action="#{pessoaBean.Adicionar}" 
+						update=":formTabela" />
+						
+					<p:commandButton value="Limpar" action="#{pessoaBean.Limpar}" />
+				</p>
+			</h:form>
+		</h:panelGroup>
+		
+		<p:dialog header="Editar Pessoa" widgetVar="dlgEditarPessoa" modal="true"
+			showEffect="blind" hideEffect="explode" resizable="false" appendTo="@(body)">
+	       
+	        <h:form id="formEditarPessoa" >
+		        
+		        <p:outputPanel id="painelEditarPessoa" style="text-align:center;">
+		            
+		            <p:panelGrid  columns="2" columnClasses="label,value">
+		               
+		                <h:outputText value="Id:" />
+		                <h:outputText value="#{pessoaBean.pessoa.id}" />
+		 
+		                <h:outputText value="Nome" />
+		                <p:inputText value="#{pessoaBean.pessoa.nome}" />
+		 
+		                <h:outputText value="E-mail" />
+		                <p:inputText value="#{pessoaBean.pessoa.email}" />
+		 
+		                <h:outputText value="Telefone" />
+		                <p:inputText value="#{pessoaBean.pessoa.telefone}" />
+		                
+		            </p:panelGrid>
+		            
+		        </p:outputPanel>
+		        
+	        </h:form>
+	        
+    	</p:dialog>
+	
+	</ui:define>
+	
+	<ui:define name="rodape">
+	   <ui:include src="/templates/rodape.xhtml" />
+	</ui:define>
+
+</ui:composition>

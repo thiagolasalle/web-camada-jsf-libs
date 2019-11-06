@@ -67,6 +67,19 @@ public class Pessoa implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+	
+	public void restaurarPessoa(Pessoa _pessoa) {
+		this.id = _pessoa.id;
+		this.nome = _pessoa.nome;
+		this.email = _pessoa.email;
+		this.telefone = _pessoa.telefone;
+		this.enderecos = _pessoa.enderecos;
+	}
+	
+	@Override
+	public Pessoa clone() {
+		return new Pessoa(this.id, this.nome, this.email, this.telefone, this.enderecos);
+	}
 
 	@Override
 	public int hashCode() {

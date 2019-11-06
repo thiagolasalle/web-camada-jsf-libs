@@ -19,29 +19,6 @@
 	
 	<ui:define name="conteudo">
 		<h1 id="tituloPrincipal">Página Principal do Sistema WEB</h1>
-		<h:form>
-			<p:dataTable var="pessoa" value="#{pessoaBean.pessoas}" 
-			 		rows="10"
-		            paginator="true"
-		            rowsPerPageTemplate="5,10,15" >
-		            
-			    <p:column headerText="Id">
-			        <h:outputText value="#{pessoa.id}" />
-			    </p:column>
-			 
-			    <p:column headerText="Nome">
-			        <h:outputText value="#{pessoa.nome}" />
-			    </p:column>
-			 
-			    <p:column headerText="Email">
-			        <h:outputText value="#{pessoa.email}" />
-			    </p:column>
-			 
-			    <p:column headerText="Telefone">
-			        <h:outputText value="#{pessoa.telefone}" />
-			    </p:column>
-			</p:dataTable>
-		</h:form>
 	</ui:define>
 	
 	<ui:define name="rodape">
